@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+
+    </style>
+    <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+    <script language="javascript" src="libraries/p5.dom.js"></script>
+    <script language="javascript" src="libraries/p5.sound.js"></script>
+    <script language="javascript" src="libraries/p5.collide2d.js"></script>
+    <script language="javascript" type="text/javascript" src="sketch.js"></script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <h1>The Price of War</h1>
+        <p>This interactive visualizations was a project done by Maaria Assami as 
+            <br /> part of the Design Studio 2 class in the Information Design and  
+            <br /> Visualization MFA program during the Spring 2016 semester under the 
+            <br /> instruction of Perdo Cruz. It captures the grim history surrounding the   
+            <br /> different interstate wars that happened between 1823 and 2003, and   
+            <br /> the price that was payed by the bloodshed that accompanied those wars.
+            <br />
+            <br /> After selecting the desired timeframe from the timeline, you will see the
+            <br />number of wars that were fought during that period. The bloodier the 
+            <br /> time period, the more the drop fills up. 
+        </p>
+        <p2>Data source: www.correlatesofwar.org</p2>
+        <img src="assets/Drop1DIV.svg"></img>
+        <a id="shrunk"></a>
+        <a id="expanded"></a>
+        <div id="myContainer"></div>
+        <img id="timeline" src="assets/DropsDIVTIMELINE-04.svg" alt="timeline"></img>
+      
+    </div>
+</body>
+
+</html>

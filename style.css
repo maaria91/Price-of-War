@@ -1,0 +1,80 @@
+/*------------Global-------------*/
+html,body{
+    height: 900px;
+    background: rgba(31, 28, 29,0.7);
+    width:100%;
+    margin: 0;
+}
+
+
+img {
+    position: absolute;
+    left: 679px;
+    top: 145px;
+    height: 700;
+    width: 750
+    
+
+}
+
+#timeline{
+    left: 385px;
+    top: 590;
+    height: 800;
+    width: 1400;
+}
+
+/*------------HEADER and TEXT-------------*/
+.section {
+    width:100%;
+    float: left;
+    /*background: orangered;*/
+
+}
+
+
+.canvas {
+    float: left;
+    height: 350%;
+}
+
+h1{
+    font-family: 'Franklin Gothic Medium', 'Franklin Gothic', 'ITC Franklin Gothic', Arial, sans-serif;
+    font-size: 65px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 900;
+    line-height: 26px;
+    color: rgb(65,17,14);
+    padding-top:70px;
+    padding-left: 100px;
+    width: 30%;
+    margin-right: 0;
+    position: absolute;
+}
+
+p{
+    font-family: 'Franklin Gothic Medium', 'Franklin Gothic', 'ITC Franklin Gothic', Arial, sans-serif;
+    font-size: 16px;
+    line-height: 25px;
+    color: rgb(153,153,153);
+    padding-left: 100px;
+    padding-top: 160px;
+    position: absolute;
+    width: 35%
+
+}
+
+p2{
+     color: rgb(153,153,153);
+    padding-top:1070px;
+    padding-left: 1800px;
+      font-size: 15px;
+        position: absolute;
+
+/*    padding-top: 1000px;*/
+}
+
+/*------------WAR HEADER and DATE-------------*/
+
+
