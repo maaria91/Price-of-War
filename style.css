@@ -1,34 +1,14 @@
 /*------------Global-------------*/
 html,body{
-    height: 900px;
-    background: rgba(31, 28, 29,0.7);
+    height: 1500px;
+   
     width:100%;
     margin: 0;
 }
 
-
-img {
-    position: absolute;
-    left: 679px;
-    top: 145px;
-    height: 700;
-    width: 750
-    
-
-}
-
-#timeline{
-    left: 385px;
-    top: 590;
-    height: 800;
-    width: 1400;
-}
-
-/*------------HEADER and TEXT-------------*/
 .section {
     width:100%;
     float: left;
-    /*background: orangered;*/
 
 }
 
@@ -36,7 +16,41 @@ img {
 .canvas {
     float: left;
     height: 350%;
+/*    position: absolute;*/
 }
+
+
+/*------------Image-------------*/
+img {
+    position: absolute;
+    left: 639px;
+    top: 80px;
+    height: 800;
+    width: 850
+    
+
+}
+
+
+/*------------Timeline-------------*/
+#timeline{
+    left: 265px;
+    top: 650;
+    height: 800;
+    width: 1400;
+}
+
+
+/*------------Legand-------------*/
+#legand1 {
+    left: 70px;
+    top: 540;
+    height: 290px;
+    width: 315px;     
+}
+
+
+/*----------Header&Text-----------*/
 
 h1{
     font-family: 'Franklin Gothic Medium', 'Franklin Gothic', 'ITC Franklin Gothic', Arial, sans-serif;
@@ -45,20 +59,20 @@ h1{
     font-variant: normal;
     font-weight: 900;
     line-height: 26px;
-    color: rgb(65,17,14);
+    color: rgb(165,17,14);
     padding-top:70px;
-    padding-left: 100px;
+    padding-left: 30px;
     width: 30%;
     margin-right: 0;
     position: absolute;
 }
 
 p{
-    font-family: 'Franklin Gothic Medium', 'Franklin Gothic', 'ITC Franklin Gothic', Arial, sans-serif;
+    font-family: 'Franklin Gothic', 'Franklin Gothic', 'ITC Franklin Gothic', Arial, sans-serif;
     font-size: 16px;
     line-height: 25px;
     color: rgb(153,153,153);
-    padding-left: 100px;
+    padding-left: 30px;
     padding-top: 160px;
     position: absolute;
     width: 35%
@@ -67,14 +81,11 @@ p{
 
 p2{
      color: rgb(153,153,153);
-    padding-top:1070px;
-    padding-left: 1800px;
+    padding-top:1080px;
+    padding-left: 1630px;
       font-size: 15px;
         position: absolute;
 
-/*    padding-top: 1000px;*/
 }
-
-/*------------WAR HEADER and DATE-------------*/
 
 

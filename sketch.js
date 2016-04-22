@@ -11,10 +11,10 @@ var numberCircles = 30; //specify the number. ((is this because were randomly ge
 
 var table;
 var wars = [];
-
 var timelinePoints = [];
 var arrayRects = [];
 var container = [];
+var SHIFT;
 
 
 
@@ -30,41 +30,44 @@ function preload() { //HERE we preload the array of the circle dots --it is pull
 
 
 
-//-----------------------------------------------------THE SET UP FOR THE CANVAS-----------------------------------------------------------//
+//-----------------------------------------------THE SET UP FOR THE CANVAS FUNCTION-----------------------------------------------------//
 
 
 function setup() { //NOW we set up the space which we will AFTERWARDS draw on.
     var myCanvas = createCanvas(windowWidth, windowHeight);
     myCanvas.parent('myContainer');
 
-    frameRate(50);//circle speed
+    frameRate(50); //circle speed
     stroke(0);
     fill(150);
 
+    SHIFT = createVector(width / 2, height / 2.4);
 
-//fixing the X & Y of the drop shell
+    img = loadImage("assets/DropsDIV.png"); // Load the image
+
+
+
+
+    //fixing the X & Y of the drop shell
     var arrayStringCoordinates = dropStrings[0].split(" "); //pulling in the drop coordinates and splitting by SPAEC
-    print(arrayStringCoordinates); //console.log = 
+    print(arrayStringCoordinates);
     arrayStringCoordinates.forEach(function (s) { //since we have 30 circles, we need a forEach statement
         var coordStrings = s.split(","); //splitting it up by comma.. now we have Xs and Ys 
 
-        //-----------------------------------------------------YELLOW CAGE-----------------------------------------------------------//
-        var x = float(coordStrings[0]) + 100 - dropWidth / 2; //converting a string to decimile (floating)
-        var y = float(coordStrings[1]) - 50 - dropHeight / 2;
-        var point = createVector(x * 2.2, y * 2.3); //creating the drop
+//-----------------------------------------------------YELLOW CAGE STET UP-----------------------------------------------------------//
+        var x = float(coordStrings[0]); //converting a string to decimile (floating)
+        var y = float(coordStrings[1]) - dropHeight / 2;
+        var point = createVector(x * 2.7, y * 2.7); //creating the drop
         drop.push(point); //pushing point into drop --in the top of the page
 
     });
+    //print(table.getRowCount() + "total rows in table");
 
 
-    print(table.getRowCount() + "total rows in table");
-
-
-    /* FILTERING DATA*/
+//-----------------------------------------------------Data Parse-----------------------------------------------------------//    
+    //FILTERING DATA
     table.getRows().forEach(function (row) {
         var warName = row.getString("WarName");
-        //print(warName);
-
         var participantName = row.getString("StateName");
         var startYear = int(row.getString("StartYear1"));
         var startMonth = int(row.getString("StartMonth1"));
@@ -105,19 +108,7 @@ function setup() { //NOW we set up the space which we will AFTERWARDS draw on.
 
     }
 
-
-    for (var i = 0; i < wars.length; i++) { //generating random circles and pushing them to the top intro part
-        //var circle = new Circle(wars[i]);
-        //arrayCircles.push(circle);
-
-    }
-
-
-
-
-
-
-    //-----------------------------------------------------THE TIMELINE SETUP-----------------------------------------------------------//
+//-------------------------------------------------THE TIMELINE SETUP-------------------------------------------------------//
 
     /*RECTS ACCORDING TO END AND START YEAR*/
     arrayRects.push(new SelectRect(1823, 1852));
@@ -166,8 +157,6 @@ function setup() { //NOW we set up the space which we will AFTERWARDS draw on.
     });
 
 
-
-
 }
 
 
@@ -212,7 +201,6 @@ function draw() { //HERE we beging the drawing process.. everythign we want to d
                 var circle = new Circle(war);
                 arrayCircles.push(circle);
 
-
             }
 
         });
@@ -229,53 +217,40 @@ function draw() { //HERE we beging the drawing process.. everythign we want to d
     function MousePos(circle) {
         //print(circle);
         var mPos = createVector(mouseX, mouseY);
-        var cpos = createVector(circle.pos.x + width / 2.129, circle.pos.y + height / 2.06);
-        //cpos.mult(1.7);
+        var cpos = createVector(circle.pos.x + SHIFT.x, circle.pos.y + SHIFT.y);
         print(circle.radius + " " + mPos.dist(cpos));
 
         if (mPos.dist(cpos) <= circle.radius) {
 
 
-
-
-            fill("red");
-//            circle.radius = sqrt(war.totalDeaths) / 15 * 2.10;
-//            if (this.radius < 7) this.radius = 35;
-//            if (this.radius > 50) this.radius = 70
-            ellipse(circle.pos.x + width / 2.129, circle.pos.y + height / 2.06, (circle.radius)  * 2.10, circle.radius  * 2.10 )
-
-            
+            //the highlight circle around the war circles
+            fill(238, 32, 77);
+            stroke(238, 32, 77);
+            ellipse(circle.pos.x + SHIFT.x, circle.pos.y + SHIFT.y, (circle.radius) * 2.20, circle.radius * 2.20)
 
 
 
-            print(circle.radius + " " + mPos.dist(cpos));
 
             //information inside the tooltip - from data
+            print(circle.radius + " " + mPos.dist(cpos));
             enteries = "War Name:" + "\n" + "Casualties";
 
             warStartDate = circle.war.WNstartDate
             warEndDate = circle.war.WNendDate
             Casualties = circle.war.totalDeaths
-                //            partName = circle.war.participantName
+              
+            details = "War Name:" + "    " + circle.war.name + "\n" + "Casualties:" + "    " + Casualties + "\n" + "Start Date:" + "     " + warStartDate + "\n" + "End Date:" + "      " + warEndDate 
 
-
-
-            details = "War Name:" + "    " + circle.war.name + "\n" + "Casualties:" + "    " + Casualties + "\n" + "Start Date:" + "     " + warStartDate + "\n" + "End Date:" + "      " + warEndDate //+ "\n" +  "Countries at war:" + "    " + circle.war.countries;
-
-            //details = circle.war.name;
-
+    
             //drawing the toolip
             push();
             noStroke();
             fill(150);
-            textSize(22);
-            textLeading(35);
-            text(details, 1350, 490)
+            textSize(16);
+            textLeading(28);
+            text(details, 1300, 530)
 
             pop();
-
-           
-
 
         }
 
@@ -283,70 +258,28 @@ function draw() { //HERE we beging the drawing process.. everythign we want to d
     }
 
 
-
-
-    arrayCircles.forEach(function (c) {
+ arrayCircles.forEach(function (c) {
         MousePos(c);
     });
 
 
 
-    //-----------------------------------------------------================-----------------------------------------------------------//
+//---------------------------------------------------DRAWING THE YELLOW CAGE-----------------------------------------------------------//
 
-    /*DRAWING THE BLOOD DROP SHELL*/
-    translate(width / 2.129, height / 2.06); //location of the drop
-    //stroke("yellow");
+    translate(SHIFT.x, SHIFT.y); //location of the drop
+
     //scale(1.7);
     noStroke();
+    //stroke("yellow");
     noFill();
     drop.forEach(function (p) {
         ellipse(p.x, p.y, 1, 1);
     });
 
-    /*DRAWING THE CIRCLES*/
-//    for (var STEPS = 0; STEPS < 3; STEPS++) {
-//        //making a collision
-//        for (var i = 0; i < arrayCircles.length - 1; i++) {
-//            for (var j = i + 1; j < arrayCircles.length; j++) {
-//                var pa = arrayCircles[i];
-//                var pb = arrayCircles[j];
-//                var ab = p5.Vector.sub(pb.pos, pa.pos);
-//                var distSq = ab.magSq();
-//                if (distSq <= sq(pa.radius + pb.radius)) {
-//                    var dist = sqrt(distSq);
-//                    var overlap = (pa.radius + pb.radius) - dist;
-//                    ab.div(dist);
-//                    ab.mult(overlap * 0.5);
-//                    pb.pos.add(ab);
-//                    ab.mult(-1);
-//                    pa.pos.add(ab);
-//
-//
-//                    if (pa.testCollision()) {
-//                        pa.goInwards();
-//                    }
-//
-//                    if (pb.testCollision()) {
-//                        pb.goInwards();
-//                    }
-//
-//
-//                }
-//            }
-//        }
-//    }
-
-    arrayCircles.forEach(function (c) { //for each circle, update it then draw it
-        c.update();
-        c.draw();
-    });
-
-
-   
-
-
+    
+    //The circles
     for (var STEPS = 0; STEPS < 3; STEPS++) {
-        //make a collision
+        //making a collision
         for (var i = 0; i < arrayCircles.length - 1; i++) {
             for (var j = i + 1; j < arrayCircles.length; j++) {
                 var pa = arrayCircles[i];
@@ -371,9 +304,8 @@ function draw() { //HERE we beging the drawing process.. everythign we want to d
                         pb.goInwards();
                     }
 
-
                 }
-                
+
             }
         }
     }
@@ -384,7 +316,12 @@ function draw() { //HERE we beging the drawing process.. everythign we want to d
     });
 
 
+    //Setting up the background drop SVG
+    image(img, -210, height / -3.6, img.width * 2.7, img.height * 2.7);
+    //    image(img, 100, 10);
+
 }
+
 
 /*CONTROLLING THE WINDOW VIEW*/
 //function windowResized() { //this is to allow the window to adjust with making it big or small 
@@ -393,7 +330,7 @@ function draw() { //HERE we beging the drawing process.. everythign we want to d
 //}
 
 
-/*SETTING UP MORE FUNCTIONS AND VARIABLES TO USE*/
+/*setting up new variables to use*/
 var ODate = function (AAAA, MM, DD) {
     this.year = AAAA;
     this.month = MM;
@@ -402,8 +339,6 @@ var ODate = function (AAAA, MM, DD) {
 }
 
 
-//******************************
-//*****************************
 function getDecimalDate(date) {
     return date.year + (date.month - 1) / 12 + (date.day - 1) / 365;
 }
@@ -418,7 +353,6 @@ var War = function (name, startyear) {
     this.participants = [];
     this.deaths = [];
     this.totalDeaths = 0;
-    // this.participantsName = countries;
 
     this.computeDeaths = function () {
         var sum = 0;
@@ -428,20 +362,14 @@ var War = function (name, startyear) {
         this.totalDeaths = sum;
     }
 
-    //---
-
-
-    //---
-
-
 }
+
 
 var Participant = function (country, startDate, endDate, deaths, participantName) {
     this.country = country;
     this.startDate = startDate;
     this.endDate = endDate;
     this.deaths = deaths;
-    // this.participantName= countries;
 }
 
 
@@ -451,23 +379,23 @@ var Circle = function (war) { //the position and movement of circles
 
 
     //DO SOMETHING ABOUT ZEROS AND OTHER WEIRD NUMBERS
-    this.radius = sqrt(this.war.totalDeaths) / 15 * 2.10;
-    if (this.radius < 7) this.radius = 35;
-    if (this.radius > 50) this.radius = 70
+    //Doing sometihng to make the circles not too tiny and not too huge
+    this.radius = sqrt(this.war.totalDeaths) / 5;
+    if (this.radius < 7) this.radius = 7;
+    if (this.radius > 70) this.radius = 70
 
-
-    this.outwardsVelocity = createVector(random(-1, 1), random(-1, 1)); //((Not moving anymore?- is this location + V like reading))
+    
+    this.outwardsVelocity = createVector(random(-1, 1), random(-1, 1)); 
+    
     this.outwardsVelocity.normalize();
     //this.outwardsVelocity.mult(-5);
     this.velocity = this.outwardsVelocity;
-    var center = createVector(50, 50);
-    //var center = createVector(0, 0);
+    //var center = createVector(50, 50);
+    var center = createVector(0, 0);
 
     //SETTING UP WHAT WOULD HAPPEN IF IT COMES ON DROP BOARDER
     this.innerVel = createVector(50, 50);
-    //this.innerVel = createVector(0, 0);
-    //this.innerVel.normalize();
-
+    
     this.hit = false;
 
     this.update = function () {
@@ -488,22 +416,17 @@ var Circle = function (war) { //the position and movement of circles
 
     }
 
-    //REACTION TO SHELL
+    //REACTION TO YELLOW CAGE
     this.draw = function () { //DRAWING the circles after we gave it all the above charactaristics 
         noStroke();
-        if (this.hit) {
-            //            fill(255, 0, 0, 100);
-            fill(102, 0, 0, 100);
 
-            //this.velocity = this.innerVel;
+        //Color scale for circles
+        var red = map(war.WNendDate - war.WNstartDate, 0, 7, 100, 255);
+        if (red > 255) red = 255;
 
-        } else {
-            fill(102, 0, 0, 100);
-        }
+        fill(red, 0, 0);
 
         ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);
-        //        text(this.war.name, this.pos.x, this.pos.y);
-
 
     }
 }
@@ -527,20 +450,15 @@ var SelectRect = function (start, end) {
     this.active = false;
 
     var totalWidth = 1200;
-
     var yearsSpan = this.end - this.start;
 
     this.width = map(yearsSpan, 0, 2003 - 1823, 0, totalWidth);
     this.height = 10;
 
-    //print(180/yearsSpan);
 
-    this.x1 = map(this.start, 1823, 2003, 0, totalWidth) + 470;
-
-
-    //this.x1 = map(this.start, 1823, 2003, 0, this.width);
+    this.x1 = map(this.start, 1823, 2003, 0, totalWidth) + 350;
     this.x2 = this.width + this.x1;
-    this.y1 = 670 + 300;
+    this.y1 = 670 + 360;
     this.y2 = this.height + this.y1;
 
     this.draw = function () {
@@ -556,7 +474,7 @@ var SelectRect = function (start, end) {
     }
 
 
-    //-----------------------------------------------------MOUSE OVER FUNCTION-----------------------------------------------------------//
+//-----------------------------------------------------MOUSE OVER FUNCTION-------------------------------------------------------//
 
     this.isMouseOver = function () {
         if (mouseX < this.x2 && mouseX >= this.x1 && mouseY < this.y2 && mouseY >= this.y1) {
@@ -566,12 +484,7 @@ var SelectRect = function (start, end) {
 
         } else this.active = false;
 
-
-
     }
-
-
-
 
 
 }
