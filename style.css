@@ -44,7 +44,9 @@ img {
 /*------------Legand-------------*/
 #legand1 {
     left: 70px;
-    top: 540;
+    top: 600;
+/*    left: 1450px;*/
+    top: 670;
     height: 290px;
     width: 315px;     
 }

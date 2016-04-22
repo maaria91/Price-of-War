@@ -224,8 +224,8 @@ function draw() { //HERE we beging the drawing process.. everythign we want to d
 
 
             //the highlight circle around the war circles
-            fill(238, 32, 77);
-            stroke(238, 32, 77);
+            fill(255, 0, 0);
+            stroke(255, 0, 0);
             ellipse(circle.pos.x + SHIFT.x, circle.pos.y + SHIFT.y, (circle.radius) * 2.20, circle.radius * 2.20)
 
 
